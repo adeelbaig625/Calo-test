@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import './JobModal.css'
 import TextInput from '../../components/TextInput/TextInput'; // Import TextInput
+import Button from '../Button/Button';
 
 // Validation schema with yup
 const schema = yup.object().shape({
@@ -31,9 +32,9 @@ const JobModal: React.FC<JobModalProps> = ({ isOpen, onClose, onSubmit }) => {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                <h2>Create Job</h2>
+                <h2 className='modal-title'>Create Job</h2>
                 <form onSubmit={handleSubmit(onFormSubmit)}>
-                    <label>Job Name:</label>
+                   
                     <Controller
                         name="name"
                         control={control}
@@ -48,8 +49,9 @@ const JobModal: React.FC<JobModalProps> = ({ isOpen, onClose, onSubmit }) => {
                     {errors.name && <p className="error">{errors.name.message}</p>}
 
                     <div className="modal-buttons">
-                        <button type="submit">Create</button>
-                        <button type="button" onClick={onClose}>Cancel</button>
+                        <Button  label='Submit' type="submit" />
+                        
+                        <Button label='Cancel' type="button" onClick={onClose}/>
                     </div>
                 </form>
             </div>

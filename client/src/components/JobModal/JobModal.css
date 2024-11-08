@@ -10,8 +10,14 @@
     align-items: center;
 }
 
+.modal-title{
+    font-size: 2rem;
+    color: #397d54;
+    margin-bottom: 20px;
+}
+
 .modal-content {
-    background: white;
+    background: #fff;
     padding: 20px;
     border-radius: 8px;
     max-width: 400px;

@@ -5,6 +5,6 @@
     border: 1px solid #ccc;
     font-size: 16px;
     display: block;
-   
+    outline-width: 0px;
     margin-bottom: 15px;
   }

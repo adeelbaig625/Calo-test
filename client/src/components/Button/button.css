@@ -8,3 +8,7 @@
     padding: 10px 20px;
     margin-left: 10px;
 }
+.btn:hover{
+    background-color: #397d54;
+    color: #7be495;
+}
