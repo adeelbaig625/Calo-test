@@ -1,0 +1,14 @@
+*{
+  margin: 0px;
+  overflow-x: hidden;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+.body{
+  background-color: #28854c;
+  min-height: 100vh;
+}
+.main{
+  padding-top: 80px;
+}

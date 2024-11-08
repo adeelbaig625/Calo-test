@@ -1,0 +1,18 @@
+.job-listing-hero{
+    
+    width: 100vw;
+    padding-top: 80px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.error-message {
+    color: #ff4d4f;
+    font-size: 14px;
+    margin-top: -12px;
+    margin-bottom: 16px;
+  }
+.form-container{
+    display: flex;
+}
