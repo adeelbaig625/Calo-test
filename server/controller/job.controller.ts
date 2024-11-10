@@ -1,5 +1,4 @@
 import AppConfig from "../config/app.config"
-import { UNSPLASH_API_URL } from "../constants"
 import { createJob, getJobs, saveJobs } from "../db"
 import axios from "axios"
 import { jobResultEnum, jobType, JobWhereParams } from "../db/type"
@@ -13,19 +12,20 @@ class JobController {
     setTimeout(async () => {
       const photoUrl = await this._fetchRandomPhoto()
       if (photoUrl) {
-        jobs[jobId].status = jobResultEnum.RESOLVED
-        jobs[jobId].result = photoUrl
-
-        saveJobs(jobs)
-
-        console.log("[LOG] Job executed")
+        const jobIndex = jobs.findIndex((job) => job.id === jobId)
+        if (jobIndex !== -1) {
+          jobs[jobIndex].status = jobResultEnum.RESOLVED
+          jobs[jobIndex].result = photoUrl
+          saveJobs(jobs)
+          console.log("[LOG] Job executed")
+        }
       }
     }, delay * 1000)
   }
 
   private _fetchRandomPhoto = async (): Promise<string | null> => {
     try {
-      const response = await axios.get(UNSPLASH_API_URL, {
+      const response = await axios.get(AppConfig.APP.UNSPLASH_API_URL, {
         params: { query: "food" },
         headers: {
           Authorization: `Client-ID ${AppConfig.APP.UNSPLASH_ACCESS_KEY}`,
@@ -38,7 +38,7 @@ class JobController {
     }
   }
 
-  create = async (req, res) => {
+  create = async (req: Request, res: Response) => {
     const { name } = req.body
     const jobId = createJob({
       name,
@@ -49,26 +49,21 @@ class JobController {
     return res.json({ jobId })
   }
 
-  get = (req, res) => {
+  get = (req: Request, res: Response) => {
     const whereParams: JobWhereParams = req.query
-    let jobs: jobType[] = getJobs(whereParams)
-    let response: Partial<jobType>[] = []
-    if (Object.values(jobs).length) {
-      response = Object.values(jobs).map((job: jobType) =>
-        job.status === jobResultEnum.PENDING ? { status: job.status } : job
-      )
-    }
-
+    const jobs: jobType[] = getJobs(whereParams)
+    const response = jobs.map((job: jobType) =>
+      job.status === jobResultEnum.PENDING ? { status: job.status } : job
+    )
     return res.json(response)
   }
 
   getById = (req: Request, res: Response) => {
     const { id } = req.params
-    let job = getJobs({ id })
+    const job = getJobs({ id }).find((job) => job.id === id)
     if (!job) {
       return res.status(404).send("Job not found")
     }
-
     return res.json(job)
   }
 }
