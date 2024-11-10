@@ -90,10 +90,9 @@ This section provides an estimated time spent on each part of the project:
 
 | Section                  | Time Spent (Hours) |
 |--------------------------|--------------------|
-| Backend Setup            | 3.0               |
-| Frontend Setup           | 3.5               |
+| Backend Setup            | 3.5               |
+| Frontend Setup           | 4.0               |
 | Unsplash API Integration | 1.0               |
-| Create Job Functionality | 2.5               |
 | Testing & Debugging      | 2.0               |
 | Documentation (README)   | 0.5               |
 
