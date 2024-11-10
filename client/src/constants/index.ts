@@ -1,5 +1,4 @@
+export const baseURL = "http://localhost:3012"
 
-export enum JobResultEnum{
-    PENDING="PENDING",
-    RESOLVED="RESOLVED"
-}
+export const getJobsEndpoint = `${baseURL}/job`
+export const createJobEndpoint = `${baseURL}/job`
